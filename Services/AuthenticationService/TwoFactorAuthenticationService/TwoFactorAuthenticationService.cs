@@ -12,8 +12,8 @@ namespace BlogPlatform.Services.AuthenticationService.TwoFactorAuthenticationSer
     public class TwoFactorAuthenticationService : ITwoFactorAuthenticationService
     {
         private readonly GenericUser _genericUser;
-        private readonly UserManager<IdentityUser> _userManager;
-        public TwoFactorAuthenticationService(GenericUser genericUser, UserManager<IdentityUser> userManager)
+        private readonly UserManager<User> _userManager;
+        public TwoFactorAuthenticationService(GenericUser genericUser, UserManager<User> userManager)
         {
             _genericUser = genericUser;
             _userManager = userManager;

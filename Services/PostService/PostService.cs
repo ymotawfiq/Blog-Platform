@@ -19,7 +19,7 @@ namespace BlogPlatform.Services.PostService
         {
             _dbContext = dbContext;
         }
-        public async Task<ApiResponse<string>> AddPostAsync(IdentityUser user, AddPostDto postDto)
+        public async Task<ApiResponse<string>> AddPostAsync(User user, AddPostDto postDto)
         {
             var existPost = await _dbContext.Post.Where(e=>e.Title.ToUpper()==postDto.Title.ToUpper()).FirstOrDefaultAsync();
             if(existPost!=null)
@@ -33,7 +33,7 @@ namespace BlogPlatform.Services.PostService
                     ._201_Created_("Post created successfully");
         }
 
-        public async Task<ApiResponse<string>> DeletePostAsync(IdentityUser user, string postId)
+        public async Task<ApiResponse<string>> DeletePostAsync(User user, string postId)
         {
             var existPost1 = await _dbContext.Post.Where(e=>e.Id == postId)
                 .Where(e=>e.UserId == user.Id).FirstOrDefaultAsync();
@@ -53,7 +53,7 @@ namespace BlogPlatform.Services.PostService
             return StatusCodeReturn<Post>._200_Success_(post);
         }
 
-        public async Task<ApiResponse<IEnumerable<Post>>> GetPostsAsync(IdentityUser user)
+        public async Task<ApiResponse<IEnumerable<Post>>> GetPostsAsync(User user)
         {
             var posts = await _dbContext.Post.Where(e=>e.UserId == user.Id).ToListAsync();
             if(posts==null||posts.Count==0)
@@ -69,7 +69,7 @@ namespace BlogPlatform.Services.PostService
             return StatusCodeReturn<IEnumerable<Post>>._200_Success_(posts);
         }
 
-        public async Task<ApiResponse<string>> UpdatePostAsync(IdentityUser user, UpdatePostDto postDto)
+        public async Task<ApiResponse<string>> UpdatePostAsync(User user, UpdatePostDto postDto)
         {
             var existPost1 = await _dbContext.Post.Where(e=>e.Id == postDto.Id)
                 .Where(e=>e.UserId == user.Id).FirstOrDefaultAsync();

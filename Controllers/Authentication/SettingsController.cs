@@ -18,9 +18,9 @@ namespace BlogPlatform.Controllers.Authentication
         private readonly ISettingsService _settingsService;
         private readonly GenericUser _genericUser;
         private readonly ISendEmailService _sendEmailService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         public SettingsController(ISettingsService settingsService, GenericUser genericUser, 
-            ISendEmailService sendEmailService, UserManager<IdentityUser> userManager)
+            ISendEmailService sendEmailService, UserManager<User> userManager)
         {
             _settingsService = settingsService;
             _genericUser = genericUser;

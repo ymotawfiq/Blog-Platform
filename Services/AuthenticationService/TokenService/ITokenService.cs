@@ -13,7 +13,7 @@ namespace BlogPlatform.Services.AuthenticationService.TokenService
 {
     public interface ITokenService
     {
-        public Task<JwtSecurityToken> GenerateUserToken(IdentityUser user);
+        public Task<JwtSecurityToken> GenerateUserToken(User user);
         public JwtSecurityToken GetToken(List<Claim> claims);
         public Task<ApiResponse<ResetPasswordDto>> GenerateResetPasswordTokenAsync(string email);
         public Task<ApiResponse<EmailConfirmationDto>> GenerateEmailConfirmationTokenAsync(string userNameOrEmail);

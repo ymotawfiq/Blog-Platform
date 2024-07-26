@@ -9,13 +9,13 @@ namespace BlogPlatform.Services.AuthenticationService
 {
     public class GenericUser
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        public GenericUser(UserManager<IdentityUser> userManager)
+        private readonly UserManager<User> _userManager;
+        public GenericUser(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
 
-        public async Task<IdentityUser> FindUser(string idOruserNameOrEmail){
+        public async Task<User> FindUser(string idOruserNameOrEmail){
             var userByEmail = await _userManager.FindByEmailAsync(idOruserNameOrEmail);
             var userByName = await _userManager.FindByNameAsync(idOruserNameOrEmail);
             var userById = await _userManager.FindByIdAsync(idOruserNameOrEmail);

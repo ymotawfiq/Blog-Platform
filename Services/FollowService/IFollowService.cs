@@ -11,8 +11,8 @@ namespace BlogPlatform.Services.FollowService
 {
     public interface IFollowService
     {
-        Task<ApiResponse<string>> FollowAsync(IdentityUser user, FollowDto followDto);
-        Task<ApiResponse<string>> UnFollowAsync(IdentityUser user, FollowDto followDto);
-        Task<ApiResponse<IEnumerable<Follow>>> GetFollowersAsync(IdentityUser user);
+        Task<ApiResponse<string>> FollowAsync(User user, FollowDto followDto);
+        Task<ApiResponse<string>> UnFollowAsync(User user, FollowDto followDto);
+        Task<ApiResponse<IEnumerable<Follow>>> GetFollowersAsync(User user);
     }
 }

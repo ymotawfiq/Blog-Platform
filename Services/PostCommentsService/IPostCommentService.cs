@@ -11,9 +11,9 @@ namespace BlogPlatform.Services.PostCommentsService
 {
     public interface IPostCommentService
     {
-        Task<ApiResponse<string>> AddPostCommentAsync(IdentityUser user, AddPostCommentDto commentDto);
-        Task<ApiResponse<string>> UpdatePostCommentAsync(IdentityUser user, UpdatePostCommentDto commentDto);
-        Task<ApiResponse<string>> DeletePostCommentAsync(IdentityUser user, string commentId);
+        Task<ApiResponse<string>> AddPostCommentAsync(User user, AddPostCommentDto commentDto);
+        Task<ApiResponse<string>> UpdatePostCommentAsync(User user, UpdatePostCommentDto commentDto);
+        Task<ApiResponse<string>> DeletePostCommentAsync(User user, string commentId);
         Task<ApiResponse<PostComment>> GetPostCommentByIdAsync(string commentId);
         Task<ApiResponse<IEnumerable<PostComment>>> GetPostCommentsAsync(string postId);
     }

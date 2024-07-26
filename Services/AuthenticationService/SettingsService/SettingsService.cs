@@ -13,8 +13,8 @@ namespace BlogPlatform.Services.AuthenticationService.SettingsService
     public class SettingsService : ISettingsService
     {
         private readonly GenericUser _genericUser;
-        private readonly UserManager<IdentityUser> _userManager;
-        public SettingsService(GenericUser genericUser, UserManager<IdentityUser> userManager)
+        private readonly UserManager<User> _userManager;
+        public SettingsService(GenericUser genericUser, UserManager<User> userManager)
         {
             _genericUser = genericUser;
             _userManager = userManager;

@@ -133,6 +133,7 @@ D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\BlogPlatform.AssemblyIn
 D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\BlogPlatform.csproj.CoreCompileInputs.cache
 D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\BlogPlatform.MvcApplicationPartsAssemblyInfo.cs
 D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\BlogPlatform.MvcApplicationPartsAssemblyInfo.cache
+D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\BlogPlatform.sourcelink.json
 D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\staticwebassets.build.json
 D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\staticwebassets.development.json
 D:\my_source_code\Projects\BlogPlatform\obj\Debug\net8.0\staticwebassets\msbuild.BlogPlatform.Microsoft.AspNetCore.StaticWebAssets.props

@@ -19,7 +19,7 @@ namespace BlogPlatform.Services.FollowService
             _dbContext = dbContext;
             _genericUser = genericUser;
         }
-        public async Task<ApiResponse<string>> FollowAsync(IdentityUser user, FollowDto followDto)
+        public async Task<ApiResponse<string>> FollowAsync(User user, FollowDto followDto)
         {
             var followedUser = await _genericUser.FindUser(followDto.IdOrNameOrEmail);
             if(followedUser==null)
@@ -39,7 +39,7 @@ namespace BlogPlatform.Services.FollowService
                         ._200_Success_("Followed successfully");
         }
 
-        public async Task<ApiResponse<IEnumerable<Follow>>> GetFollowersAsync(IdentityUser user)
+        public async Task<ApiResponse<IEnumerable<Follow>>> GetFollowersAsync(User user)
         {
             var followers = await _dbContext.Follows.Where(e=>e.User1Id == user.Id).ToListAsync();
             if(followers==null||followers.Count==0)
@@ -47,7 +47,7 @@ namespace BlogPlatform.Services.FollowService
             return StatusCodeReturn<IEnumerable<Follow>>._200_Success_(followers);
         }
 
-        public async Task<ApiResponse<string>> UnFollowAsync(IdentityUser user, FollowDto followDto)
+        public async Task<ApiResponse<string>> UnFollowAsync(User user, FollowDto followDto)
         {
             var followedUser = await _genericUser.FindUser(followDto.IdOrNameOrEmail);
             if(followedUser==null)

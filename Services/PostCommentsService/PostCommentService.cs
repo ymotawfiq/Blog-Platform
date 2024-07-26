@@ -19,7 +19,7 @@ namespace BlogPlatform.Services.PostCommentsService
         {
             _dbContext = dbContext;
         }
-        public async Task<ApiResponse<string>> AddPostCommentAsync(IdentityUser user, AddPostCommentDto commentDto)
+        public async Task<ApiResponse<string>> AddPostCommentAsync(User user, AddPostCommentDto commentDto)
         {
             await _dbContext.PostComments.AddAsync(new PostComment{
                 Comment = commentDto.Comment, UserId = user.Id, PostId = commentDto.PostId
@@ -29,7 +29,7 @@ namespace BlogPlatform.Services.PostCommentsService
                 ._201_Created_("Commented successfully");
         }
 
-        public async Task<ApiResponse<string>> DeletePostCommentAsync(IdentityUser user, string commentId)
+        public async Task<ApiResponse<string>> DeletePostCommentAsync(User user, string commentId)
         {
             var comment = await _dbContext.PostComments.Where(e=>e.Id == commentId)
                 .Where(e=>e.UserId==user.Id).FirstOrDefaultAsync();
@@ -58,7 +58,7 @@ namespace BlogPlatform.Services.PostCommentsService
             return StatusCodeReturn<IEnumerable<PostComment>>._200_Success_(postComments);
         }
 
-        public async Task<ApiResponse<string>> UpdatePostCommentAsync(IdentityUser user, UpdatePostCommentDto commentDto)
+        public async Task<ApiResponse<string>> UpdatePostCommentAsync(User user, UpdatePostCommentDto commentDto)
         {
             var comment = await _dbContext.PostComments.Where(e=>e.Id == commentDto.Id)
                 .Where(e=>e.UserId==user.Id).FirstOrDefaultAsync();

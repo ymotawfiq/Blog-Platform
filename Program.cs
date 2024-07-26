@@ -1,6 +1,7 @@
 using System.Text;
 using BlogPlatform.Data;
 using BlogPlatform.Data.DTOs.AuthenticateUser;
+using BlogPlatform.Data.Models;
 using BlogPlatform.Services.AuthenticationService;
 using BlogPlatform.Services.AuthenticationService.EmailService;
 using BlogPlatform.Services.AuthenticationService.RolesService;
@@ -25,8 +26,8 @@ builder.Services.AddDbContext<AppDbContext>(op=>{
 });
 
 // Add Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(op=>{
-    op.Tokens.ProviderMap["Email"] = new TokenProviderDescriptor(typeof(EmailTokenProvider<IdentityUser>));
+builder.Services.AddIdentity<User, IdentityRole>(op=>{
+    op.Tokens.ProviderMap["Email"] = new TokenProviderDescriptor(typeof(EmailTokenProvider<User>));
     op.Password.RequireDigit = false;
     op.Password.RequiredLength = 8;
     op.Password.RequiredUniqueChars = 0;

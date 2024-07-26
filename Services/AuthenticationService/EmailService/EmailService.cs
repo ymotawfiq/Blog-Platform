@@ -11,9 +11,9 @@ namespace BlogPlatform.Services.AuthenticationService.EmailService
 {
     public class EmailService : IEmailService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly GenericUser _genericUser;
-        public EmailService(UserManager<IdentityUser> userManager, GenericUser genericUser)
+        public EmailService(UserManager<User> userManager, GenericUser genericUser)
         {
             _userManager = userManager;
             _genericUser = genericUser;

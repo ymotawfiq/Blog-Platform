@@ -23,12 +23,12 @@ namespace BlogPlatform.Controllers.Authentication
     {
         private readonly IUserAccountService _userAccountService;
         private readonly IRolesService _rolesService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly ISendEmailService _sendEmailService;
         private readonly IEmailService _emailService;
         private readonly GenericUser _genericUser;
         public UserAccountController(IUserAccountService userAccountService, IRolesService rolesService,
-            UserManager<IdentityUser> userManager, ISendEmailService sendEmailService,
+            UserManager<User> userManager, ISendEmailService sendEmailService,
                 IEmailService emailService, GenericUser genericUser)
         {
             _userAccountService = userAccountService;

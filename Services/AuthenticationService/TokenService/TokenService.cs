@@ -17,10 +17,10 @@ namespace BlogPlatform.Services.AuthenticationService.TokenService
 {
     public class TokenService : ITokenService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly GenericUser _genericUser;
-        public TokenService(UserManager<IdentityUser> userManager, IConfiguration configuration, 
+        public TokenService(UserManager<User> userManager, IConfiguration configuration, 
             GenericUser genericUser)
         {
             _userManager = userManager;
@@ -49,7 +49,7 @@ namespace BlogPlatform.Services.AuthenticationService.TokenService
                     ._201_Created_(new ResetPasswordDto {Token = token, Email = email});
         }
 
-        public async Task<JwtSecurityToken> GenerateUserToken(IdentityUser user)
+        public async Task<JwtSecurityToken> GenerateUserToken(User user)
         {
             var claims = new List<Claim>{
                 new Claim(ClaimTypes.Email, user.Email!),

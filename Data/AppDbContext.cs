@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogPlatform.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -23,7 +23,7 @@ namespace BlogPlatform.Data
         
         private void ApplyConfiguration(ModelBuilder builder){
             builder
-                .ApplyConfiguration(new IdentityUserConfigurations())
+                .ApplyConfiguration(new UserConfigurations())
                 .ApplyConfiguration(new PostsConfigurations())
                 .ApplyConfiguration(new PostCommentConfigurations())
                 .ApplyConfiguration(new FollowConfigurations());

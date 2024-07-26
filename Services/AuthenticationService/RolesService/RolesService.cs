@@ -12,14 +12,14 @@ namespace BlogPlatform.Services.AuthenticationService.RolesService
 {
     public class RolesService : IRolesService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public RolesService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public RolesService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async Task<ApiResponse<List<string>>> AssignRolesToUserAsync(IdentityUser user, List<string> roles)
+        public async Task<ApiResponse<List<string>>> AssignRolesToUserAsync(User user, List<string> roles)
         {
             roles = NormalizeRoles(roles);
             if(roles.Contains("admin".ToUpper()))
@@ -43,7 +43,7 @@ namespace BlogPlatform.Services.AuthenticationService.RolesService
             return roles;
         }
 
-        private async Task<ApiResponse<List<string>>> AssignRolesToAdminAsync(IdentityUser user){
+        private async Task<ApiResponse<List<string>>> AssignRolesToAdminAsync(User user){
             List<IdentityRole> roles = await _roleManager.Roles.ToListAsync();
             List<string> assignedRoles = new();
             foreach(var role in roles){

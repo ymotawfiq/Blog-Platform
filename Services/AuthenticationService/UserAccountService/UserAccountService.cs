@@ -13,12 +13,12 @@ namespace BlogPlatform.Services.AuthenticationService.UserAccountService
     public class UserAccountService : IUserAccountService
     {
         private IRolesService _rolesService;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly GenericUser _genericUser;
         private readonly ITokenService _tokenService;
-        public UserAccountService(IRolesService rolesService, UserManager<IdentityUser> userManager, 
-            GenericUser genericUser, SignInManager<IdentityUser> signInManager, 
+        public UserAccountService(IRolesService rolesService, UserManager<User> userManager, 
+            GenericUser genericUser, SignInManager<User> signInManager, 
                 ITokenService tokenService)
         {
             _userManager = userManager;
@@ -78,7 +78,7 @@ namespace BlogPlatform.Services.AuthenticationService.UserAccountService
                                 await _tokenService.GenerateUserToken(user)
                             ),
                             Type = "Bearer token", 
-                            User = new IdentityUser{
+                            User = new User{
                                 UserName = user.UserName,
                                 Email = user.Email
                             }
