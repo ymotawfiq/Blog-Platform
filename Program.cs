@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using BlogPlatform.Data;
 using BlogPlatform.Data.DTOs.AuthenticateUser;
 using BlogPlatform.Data.Models;
@@ -99,6 +100,12 @@ builder.Services.AddSwaggerGen(option =>
             new string[]{}
         }
     });
+});
+
+// to kill circular in json
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
 // Injection

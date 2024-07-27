@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj": {}
+    "d:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj": {}
   },
   "projects": {
-    "D:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj": {
+    "d:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj",
+        "projectUniqueName": "d:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj",
         "projectName": "BlogPlatform",
-        "projectPath": "D:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj",
+        "projectPath": "d:\\my_source_code\\Projects\\BlogPlatform\\BlogPlatform.csproj",
         "packagesPath": "C:\\Users\\yousef\\.nuget\\packages\\",
-        "outputPath": "D:\\my_source_code\\Projects\\BlogPlatform\\obj\\",
+        "outputPath": "d:\\my_source_code\\Projects\\BlogPlatform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yousef\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -52,7 +52,22 @@ namespace BlogPlatform.Services.PostCommentsService
 
         public async Task<ApiResponse<IEnumerable<PostComment>>> GetPostCommentsAsync(string postId)
         {
-            var postComments = await _dbContext.PostComments.Where(e=>e.PostId == postId).ToListAsync();
+            var post = await _dbContext.Post.Select(e=>new Post{
+                Content = e.Content,
+                CreatedAt = e.CreatedAt,
+                Id = e.Id,
+                Title = e.Title,
+                UserId = e.UserId
+            }).Where(e=>e.Id==postId).FirstOrDefaultAsync();
+            var postComments = await _dbContext.PostComments.OrderByDescending(e=>e.CreatedAt).Select(e=>new PostComment{
+                Comment = e.Comment,
+                CreatedAt = e.CreatedAt,
+                Id = e.Id,
+                PostId = e.PostId,
+                UpdatededAt = e.UpdatededAt,
+                UserId = e.UserId,
+                Post = post
+            }).Where(e=>e.PostId == postId).ToListAsync();
             if(postComments==null||postComments.Count==0)
                 return StatusCodeReturn<IEnumerable<PostComment>>._204_No_Content_();
             return StatusCodeReturn<IEnumerable<PostComment>>._200_Success_(postComments);

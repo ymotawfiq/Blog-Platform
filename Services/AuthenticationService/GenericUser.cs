@@ -28,7 +28,7 @@ namespace BlogPlatform.Services.AuthenticationService
             return null!;
         }
 
-        public User SetUserToReturn(User user)
+        public async Task<User> SetUserToReturn(User user)
         {
             if (user != null)
             {

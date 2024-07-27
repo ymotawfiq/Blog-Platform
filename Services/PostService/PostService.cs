@@ -7,6 +7,7 @@ using BlogPlatform.Data.DTOs;
 using BlogPlatform.Data.Models;
 using BlogPlatform.Data.Models.ResponseModel;
 using BlogPlatform.Data.Models.ResponseModel.GenericResponseModelReturn;
+using BlogPlatform.Services.AuthenticationService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +16,11 @@ namespace BlogPlatform.Services.PostService
     public class PostService : IPostService
     {
         private readonly AppDbContext _dbContext;
-        public PostService(AppDbContext dbContext)
+        private readonly GenericUser _genericUser;
+        public PostService(AppDbContext dbContext, GenericUser genericUser)
         {
             _dbContext = dbContext;
+            _genericUser = genericUser;
         }
         public async Task<ApiResponse<string>> AddPostAsync(User user, AddPostDto postDto)
         {
@@ -45,7 +48,7 @@ namespace BlogPlatform.Services.PostService
             return StatusCodeReturn<string>._204_No_Content_("Post deleted successfully");
         }
 
-        public async Task<ApiResponse<Post>> GetPostAsync(string postId)
+        public async Task<ApiResponse<Post>> GetPostByIdAsync(string postId)
         {
             var post = await _dbContext.Post.Where(e=>e.Id==postId).FirstOrDefaultAsync();
             if(post==null)
@@ -53,9 +56,25 @@ namespace BlogPlatform.Services.PostService
             return StatusCodeReturn<Post>._200_Success_(post);
         }
 
+        public async Task<ApiResponse<Post>> GetPostByTitleAsync(string title)
+        {
+            var post = await _dbContext.Post.Where(e=>e.Title.ToUpper()==title.ToUpper()).FirstOrDefaultAsync();
+            if(post==null)
+                return StatusCodeReturn<Post>._404_Not_Found_("Post not found");
+            return StatusCodeReturn<Post>._200_Success_(post);
+        }
+
         public async Task<ApiResponse<IEnumerable<Post>>> GetPostsAsync(User user)
         {
-            var posts = await _dbContext.Post.Where(e=>e.UserId == user.Id).ToListAsync();
+            var posts = await _dbContext.Post.OrderByDescending(e=>e.CreatedAt).Select(e=>new Post{
+                Content = e.Content,
+                CreatedAt = e.CreatedAt,
+                Id = e.Id,
+                Title = e.Title,
+                UpdatededAt = e.UpdatededAt,
+                UserId = e.UserId,
+                User = new User {Id=user.Id, UserName=user.UserName}
+            }).Where(e=>e.UserId == user.Id).ToListAsync();
             if(posts==null||posts.Count==0)
                 return StatusCodeReturn<IEnumerable<Post>>._204_No_Content_();
             return StatusCodeReturn<IEnumerable<Post>>._200_Success_(posts);
@@ -63,7 +82,14 @@ namespace BlogPlatform.Services.PostService
 
         public async Task<ApiResponse<IEnumerable<Post>>> GetPostsAsync()
         {
-            var posts = await _dbContext.Post.ToListAsync();
+            var posts = await _dbContext.Post.OrderByDescending(e=>e.CreatedAt).Select(e=>new Post{
+                Content = e.Content,
+                CreatedAt = e.CreatedAt,
+                Id = e.Id,
+                Title = e.Title,
+                UpdatededAt = e.UpdatededAt,
+                UserId = e.UserId,
+            }).ToListAsync();
             if(posts==null||posts.Count==0)
                 return StatusCodeReturn<IEnumerable<Post>>._204_No_Content_();
             return StatusCodeReturn<IEnumerable<Post>>._200_Success_(posts);

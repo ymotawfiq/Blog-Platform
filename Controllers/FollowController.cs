@@ -58,7 +58,7 @@ namespace BlogPlatform.Controllers
             }
         }
 
-        [HttpPost("followers")]
+        [HttpGet("followers")]
         public async Task<IActionResult> GetFollowersAsync(){
             try{
                 if(HttpContext.User!=null&&HttpContext.User.Identity!=null&&
@@ -66,6 +66,26 @@ namespace BlogPlatform.Controllers
                     var user = await _genericUser.FindUser(HttpContext.User.Identity.Name);
                     if(user!=null)
                         return Ok(await _followService.GetFollowersAsync(user));
+                    return StatusCode(StatusCodes.Status404NotFound, StatusCodeReturn<string>
+                        ._404_Not_Found_("User not found"));
+                }
+                return StatusCode(StatusCodes.Status401Unauthorized, StatusCodeReturn<string>
+                    ._401_Un_Authorized_());
+            }
+            catch(Exception e){
+                return StatusCode(StatusCodes.Status500InternalServerError, StatusCodeReturn<string>
+                    ._500_Internal_Server_Error_(e.Message));
+            }
+        }
+
+        [HttpGet("following")]
+        public async Task<IActionResult> GetFolloweingAsync(){
+            try{
+                if(HttpContext.User!=null&&HttpContext.User.Identity!=null&&
+                HttpContext.User.Identity.Name!=null){
+                    var user = await _genericUser.FindUser(HttpContext.User.Identity.Name);
+                    if(user!=null)
+                        return Ok(await _followService.GetFolloweingAsync(user));
                     return StatusCode(StatusCodes.Status404NotFound, StatusCodeReturn<string>
                         ._404_Not_Found_("User not found"));
                 }

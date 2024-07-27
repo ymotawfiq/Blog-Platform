@@ -15,7 +15,8 @@ namespace BlogPlatform.Services.PostService
         Task<ApiResponse<string>> AddPostAsync(User user, AddPostDto postDto);
         Task<ApiResponse<string>> UpdatePostAsync(User user, UpdatePostDto postDto);
         Task<ApiResponse<string>> DeletePostAsync(User user, string postId);
-        Task<ApiResponse<Post>> GetPostAsync(string postId);
+        Task<ApiResponse<Post>> GetPostByIdAsync(string postId);
+        Task<ApiResponse<Post>> GetPostByTitleAsync(string title);
         Task<ApiResponse<IEnumerable<Post>>> GetPostsAsync(User user);
         Task<ApiResponse<IEnumerable<Post>>> GetPostsAsync();
     }

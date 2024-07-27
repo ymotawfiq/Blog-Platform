@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using BlogPlatform.Data.DTOs;
 using BlogPlatform.Data.Models.ResponseModel.GenericResponseModelReturn;
 using BlogPlatform.Services.AuthenticationService;
@@ -61,10 +58,21 @@ namespace BlogPlatform.Controllers
             }
         }
 
-        [HttpGet("post/{id}")]
-        public async Task<IActionResult> GetPostAsync([FromRoute] string id){
+        [HttpGet("post-By-id/{id}")]
+        public async Task<IActionResult> GetPostByIdAsync([FromRoute] string id){
             try{
-                return Ok(await _postService.GetPostAsync(id));
+                return Ok(await _postService.GetPostByIdAsync(id));
+            }
+            catch(Exception e){
+                return StatusCode(StatusCodes.Status500InternalServerError, StatusCodeReturn<string>
+                    ._500_Internal_Server_Error_(e.Message));
+            }
+        }
+
+        [HttpGet("post-by-title/{title}")]
+        public async Task<IActionResult> GetPostByTitleAsync([FromRoute] string title){
+            try{
+                return Ok(await _postService.GetPostByTitleAsync(title));
             }
             catch(Exception e){
                 return StatusCode(StatusCodes.Status500InternalServerError, StatusCodeReturn<string>

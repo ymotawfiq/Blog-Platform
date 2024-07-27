@@ -39,9 +39,25 @@ namespace BlogPlatform.Services.FollowService
                         ._200_Success_("Followed successfully");
         }
 
+        public async Task<ApiResponse<IEnumerable<Follow>>> GetFolloweingAsync(User user)
+        {
+            var followers = await _dbContext.Follows.Select(e=>new Follow{
+                Id = e.Id,
+                User1Id = e.User1Id,
+                User2Id = e.User2Id
+            }).Where(e=>e.User2Id == user.Id).ToListAsync();
+            if(followers==null||followers.Count==0)
+                return StatusCodeReturn<IEnumerable<Follow>>._204_No_Content_();
+            return StatusCodeReturn<IEnumerable<Follow>>._200_Success_(followers);
+        }
+
         public async Task<ApiResponse<IEnumerable<Follow>>> GetFollowersAsync(User user)
         {
-            var followers = await _dbContext.Follows.Where(e=>e.User1Id == user.Id).ToListAsync();
+            var followers = await _dbContext.Follows.Select(e=>new Follow{
+                Id = e.Id,
+                User1Id = e.User1Id,
+                User2Id = e.User2Id
+            }).Where(e=>e.User1Id == user.Id).ToListAsync();
             if(followers==null||followers.Count==0)
                 return StatusCodeReturn<IEnumerable<Follow>>._204_No_Content_();
             return StatusCodeReturn<IEnumerable<Follow>>._200_Success_(followers);
